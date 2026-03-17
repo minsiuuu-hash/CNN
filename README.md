@@ -1,14 +1,22 @@
-FPGA : PYNQ-Z2
+FPGA : PYNQ-Z2<br>
 Frequency = 125Mhz
 
 Tool : PyThorch, Vivado
 
+Spec<br>
+The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.<br>
+Batch Size = 64<br>
+Training Epoch = 10<br>
+Learning Rate = 0.01<br>
+Optimizer = Stochastical Gradient Descent (Momentum = 0.5)<br>
+Activation Function = ReLU<br>
+
 Design Goal
-1. Weight extraction and quantization using PyTorch
-   1) Leverages CNN models trained with PyTorch
-   2) Weight and bias extraction and purification
-   3) Applying log2-based quantization
-   4) .txt file conversion and save and read
+1. Weight extraction and quantization using PyTorch<br>
+   1) Leverages CNN models trained with PyTorch<br>
+   2) Weight and bias extraction and purification<br>
+   3) Applying log2-based quantization<br>
+   4) .txt file conversion and save and read<br>
    
 
 
