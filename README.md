@@ -3,6 +3,16 @@ Frequency = 125Mhz
 
 Tool : PyThorch, Vivado
 
+
+Design Goal
+1. Weight extraction and quantization using PyTorch<br>
+   1) Leverages CNN models trained with PyTorch<br>
+   2) Weight and bias extraction and purification<br>
+   3) Applying log2-based quantization<br>
+   4) .txt file conversion and save and read<br>
+
+
+
 CNN Structure
 The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.<br>
 
@@ -13,12 +23,9 @@ The structure of the adopted CNN is 2-layer below, and the parameters are set as
 ● Activation Function = ReLU<br>
 ![project image](img/CNN.png)
 
-Design Goal
-1. Weight extraction and quantization using PyTorch<br>
-   1) Leverages CNN models trained with PyTorch<br>
-   2) Weight and bias extraction and purification<br>
-   3) Applying log2-based quantization<br>
-   4) .txt file conversion and save and read<br>
+we could check the accuracy of about 96%.
+![project image](img/pythorch_result.png)
+
 
 
 
