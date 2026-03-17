@@ -35,6 +35,9 @@ We use MNIST Dataset<br>
 we could check the accuracy of about 96%.<br>
 ![project image](img/pythorch_result.png)
 
+RTL Code BlockDiagram<br>
+![project image](img/blockdiagram.png)
+
 
 
 
