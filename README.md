@@ -30,16 +30,19 @@ We use MNIST Dataset<br>
 ● Learning Rate = 0.01<br>
 ● Optimizer = Stochastical Gradient Descent (Momentum = 0.5)<br>
 ● Activation Function = ReLU<br>
-![project image](img/CNN.png)
+![project image](img/CNN.png)<br>
 
 we could check the accuracy of about 96%.<br>
-![project image](img/pythorch_result.png)
+![project image](img/pythorch_result.png)<br>
 
 RTL Code BlockDiagram<br>
-![project image](img/blockdiagram.png)
+![project image](img/blockdiagram.png) <br>
+
+Simulation Result(INPUT 1000)
+![project image](img/simulation_result_console.png) <br>
 
 Compare Resource
-![project image](img/using_source.png)
+![project image](img/using_source.png)<br>
 
 
 
