@@ -19,7 +19,8 @@ Design Goal
    2) Weight and bias extraction and purification<br>
    3) Applying log2-based quantization<br>
    4) .txt file conversion and save and read<br>
-   
+
+   ![project image](img/result_pythorch.png)
 
 
 
