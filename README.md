@@ -20,6 +20,7 @@ Design Goal
    2) To utilize low power, the Log2 shift method is used instead of dividing.<br>
 
 
+
 CNN Structure<br>
 The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.<br>
 We use MNIST Dataset<br>
