@@ -5,6 +5,7 @@ Tool : PyThorch, Vivado
 
 CNN Structure
 The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.<br>
+
 ● Batch Size = 64<br>
 ● Training Epoch = 10<br>
 ● Learning Rate = 0.01<br>
