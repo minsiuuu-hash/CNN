@@ -20,8 +20,6 @@ Design Goal
    3) Applying log2-based quantization<br>
    4) .txt file conversion and save and read<br>
 
-   ![project image](img/pythorch_resut.png)
-
 
 
 
