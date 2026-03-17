@@ -24,7 +24,7 @@ The structure of the adopted CNN is 2-layer below, and the parameters are set as
 ● Activation Function = ReLU<br>
 ![project image](img/CNN.png)
 
-we could check the accuracy of about 96%.
+we could check the accuracy of about 96%.<br>
 ![project image](img/pythorch_result.png)
 
 
