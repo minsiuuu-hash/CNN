@@ -3,13 +3,14 @@ Frequency = 125Mhz
 
 Tool : PyThorch, Vivado
 
-Spec<br>
+CNN Structure
 The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.<br>
-Batch Size = 64<br>
-Training Epoch = 10<br>
-Learning Rate = 0.01<br>
-Optimizer = Stochastical Gradient Descent (Momentum = 0.5)<br>
-Activation Function = ReLU<br>
+● Batch Size = 64<br>
+● Training Epoch = 10<br>
+● Learning Rate = 0.01<br>
+● Optimizer = Stochastical Gradient Descent (Momentum = 0.5)<br>
+● Activation Function = ReLU<br>
+![project image](img/CNN.png)
 
 Design Goal
 1. Weight extraction and quantization using PyTorch<br>
