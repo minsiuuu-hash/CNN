@@ -15,6 +15,7 @@ Design Goal
 
    1) Table .v FILE<br>
    ![project image](img/RTL.png) <br>
+
    
    2) To utilize low power, the Log2 shift method is used instead of dividing.<br>
 
