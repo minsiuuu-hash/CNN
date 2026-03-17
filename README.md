@@ -10,8 +10,7 @@ Design Goal
    2) Weight and bias extraction and purification<br>
    3) Applying log2-based quantization<br>
    4) .txt file conversion and save and read<br>
-2. Using vivado to design RTL code
-   ![project image](img/RTL.png)
+2. Using vivado to design RTL code<br>
 
 
 CNN Structure<br>
