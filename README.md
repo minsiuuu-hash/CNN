@@ -14,8 +14,9 @@ Design Goal
    1) ㅇasdfasdf
 
 
-CNN Structure
+CNN Structure<br>
 The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.<br>
+We use MNIST Dataset<br>
 
 ● Batch Size = 64<br>
 ● Training Epoch = 10<br>
