@@ -13,6 +13,7 @@ Design Goal
 2. Using vivado to design RTL code<br>
    1) Table .v FILE<br>
    ![project image](img/RTL.png) <br>
+   
    2) To utilize low power, the Log2 shift method is used instead of dividing.<br>
 
 
