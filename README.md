@@ -3,6 +3,7 @@ Frequency = 125Mhz
 
 Tool : PyThorch, Vivado
 
+Baseline : https://github.com/boaaaang/CNN-Implementation-in-Verilog
 
 Design Goal
 1. Weight extraction and quantization using PyTorch<br>
