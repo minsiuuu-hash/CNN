@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2025/06/09 03:39:06
-// Design Name: 
-// Module Name: log2_conv_2
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module log2_conv_2(
     input  signed [18:0] exp_data_0,  input signed [18:0] exp_data_1,  input signed [18:0] exp_data_2,
