@@ -1,22 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2025/06/06 17:53:04
-// Design Name: 
-// Module Name: log2_conv_1
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 module log2_conv_1(
     input  signed [15:0] exp_data_0,  input signed [15:0] exp_data_1,  input signed [15:0] exp_data_2,
