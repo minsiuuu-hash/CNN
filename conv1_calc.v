@@ -35,7 +35,7 @@
     wire signed [15:0] exp_data [0:24];
     wire signed [11:0] exp_bias [0:2];
 
-    // 파일에서 weight 및 bias 읽기
+    // Read weight and bias from file
     initial begin
         $readmemb("conv1_w1.txt", weight_1);
         $readmemb("conv1_w2.txt", weight_2);
@@ -43,7 +43,7 @@
         $readmemh("conv1_bias.txt", bias);
     end
 
-    // unsigned 8bit data -> signed 16bit 확장
+    // unsigned 8bit data -> signed 16bit
     assign exp_data[0] = {8'd0, data_out_0};
  assign exp_data[1] = {8'd0, data_out_1};
  assign exp_data[2] = {8'd0, data_out_2};
@@ -71,7 +71,7 @@
  assign exp_data[24] = {8'd0, data_out_24};
 
 
-    // bias sign 확장
+    // bias sign
     assign exp_bias[0] = (bias[0][7] == 1) ? {4'b1111, bias[0]} : {4'd0, bias[0]};
     assign exp_bias[1] = (bias[1][7] == 1) ? {4'b1111, bias[1]} : {4'd0, bias[1]};
     assign exp_bias[2] = (bias[2][7] == 1) ? {4'b1111, bias[2]} : {4'd0, bias[2]};
