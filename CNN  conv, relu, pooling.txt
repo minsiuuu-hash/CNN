@@ -1,0 +1,37 @@
+CNN(Convolutional Neural Network) > 이미지 처리나 패턴인식에 탁월한 성능
+이미지는 픽셀로 이루어져있고 각각의 픽셀은 rgb값을 가진 데이터입니다.
+인간의 시각처리와 비슷.
+
+convolution layer > pooling layer > fully-connected layer
+
+conv(합성곱연산) > 입력데이터와 커널을 곱하는데, 커널을 슬라이드 시키면서 합성곱을 계산함. 이의 결과를 feature map(지역적 특성)이라고 함.
+이미지의 특성과 유사한 커널의 feature map의 값은 높다. 유사하지않으면 낮음.
+kernel이 많아서 feature map 이 많아지면 자동적으로 복잡한 이미지도 가능.
+kernel의 크기가 클수록 feature map의 크기가 작아짐.
+feature map의크기를 적당하게 해야함.
+strides > 필터(kernel)를 이동시키는 간격을 뜻함 값이 1이면 한(1)칸 옆에서 컨볼루션연산 반복, stride값이 커지면 feature map의 크기가 작아짐.
+결국 kernel과 stride가 연산량과 디테일을 결정함.
+
+relu = 기본적인 활성화 함수(비선형성).
+relu > conv에서의 값이 0보다크면 그대로 출력, 0보다 작으면 0으로 출력
+relu 이후에 log2양자화를 진행. 음수가 존재하지않기때문에. 
+
+pooling > max를 젤 많이 활용함, pooling 값이 크다는것은 중요한 정보를 더 많이 가지고있다는 뜻임(즉 더 좋은 필터)
+즉 pooling을 이용해서 feature map의 크기 조절 가능.
+
+padding > 데이터를 줄이지않기위해서 데이터주변을 0으로 채움
+이것을 통해서 feature map의 크기를 유지가능. 가장자리도 연산에 포함되게함.
+
+flattern을 진행해야함. 1차원 벡터로 펼치는 과정.
+fc layer > 1차원의 벡터에 바이어스를 더함. 더하는 이유가 relu 더 잘되게할라고.
+Flatten된 feature에 가중치 곱(Wx) + 바이어스(b)를 더한 뒤,
+ReLU로 비선형성을 주어 다음 layer로 전달한다.//  fc layer는 마지막에 한번만
+
+weight, bias는 pythorch를 활용해서 추출해보았다.(stl-10)
+
+mnist > 우리 cnn 데이터셋
+
+pattern이 weight(cnn 필터값)
+
+------------------------------------------------------------------
+LLM(LARGE LANGUAGE MODEL)
