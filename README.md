@@ -45,6 +45,7 @@ Simulation Result(INPUT 1000)
 Compare Resource
 ![project image](img/using_source.png)<br>
 
+[캡스톤디자인_CNN.pdf](https://github.com/user-attachments/files/28446940/_CNN.pdf)
 
 
 
@@ -62,4 +63,5 @@ Compare Resource
 
 
 in the bottom, it is our presentation.   
-[Uploading 최종ppt_final.pptx…]()
+
+
