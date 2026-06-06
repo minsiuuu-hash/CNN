@@ -1,35 +1,333 @@
-CNN(Convolutional Neural Network) > 이미지 처리나 패턴인식에 탁월한 성능
-이미지는 픽셀로 이루어져있고 각각의 픽셀은 rgb값을 가진 데이터입니다.
-인간의 시각처리와 비슷.
+# CNN 개념 정리
 
-convolution layer > pooling layer > fully-connected layer
+## 1. CNN이란?
 
-conv(합성곱연산) > 입력데이터와 커널을 곱하는데, 커널을 슬라이드 시키면서 합성곱을 계산함. 이의 결과를 feature map(지역적 특성)이라고 함.
-이미지의 특성과 유사한 커널의 feature map의 값은 높다. 유사하지않으면 낮음.
-kernel이 많아서 feature map 이 많아지면 자동적으로 복잡한 이미지도 가능.
-kernel의 크기가 클수록 feature map의 크기가 작아짐.
-feature map의크기를 적당하게 해야함.
-strides > 필터(kernel)를 이동시키는 간격을 뜻함 값이 1이면 한(1)칸 옆에서 컨볼루션연산 반복, stride값이 커지면 feature map의 크기가 작아짐.
-결국 kernel과 stride가 연산량과 디테일을 결정함.
+CNN은 Convolutional Neural Network의 약자이며, 이미지 처리나 패턴 인식에 뛰어난 성능을 보이는 신경망 구조이다.
 
-relu = 기본적인 활성화 함수(비선형성).
-relu > conv에서의 값이 0보다크면 그대로 출력, 0보다 작으면 0으로 출력
-relu 이후에 log2양자화를 진행. 음수가 존재하지않기때문에. 
+이미지는 픽셀로 이루어진 데이터이다. 일반적인 컬러 이미지는 각 픽셀이 R, G, B 3개의 채널 값을 가진다. 하지만 MNIST는 컬러 이미지가 아니라 1채널 grayscale 이미지이다.
 
-pooling > max를 젤 많이 활용함, pooling 값이 크다는것은 중요한 정보를 더 많이 가지고있다는 뜻임(즉 더 좋은 필터)
-즉 pooling을 이용해서 feature map의 크기 조절 가능.
+CNN은 인간의 시각 처리 방식과 비슷하게, 처음에는 간단한 특징을 추출하고, 뒤로 갈수록 더 복잡한 특징을 조합한다.
 
-padding > 데이터를 줄이지않기위해서 데이터주변을 0으로 채움
-이것을 통해서 feature map의 크기를 유지가능. 가장자리도 연산에 포함되게함.
+예를 들면 다음과 같은 흐름으로 특징을 학습한다.
 
-flattern을 진행해야함. 1차원 벡터로 펼치는 과정.
-fc layer > 1차원의 벡터에 바이어스를 더함. 더하는 이유가 relu 더 잘되게할라고.
-Flatten된 feature에 가중치 곱(Wx) + 바이어스(b)를 더한 뒤,
-ReLU로 비선형성을 주어 다음 layer로 전달한다.//  fc layer는 마지막에 한번만
+edge, line, corner
+        ↓
+local pattern
+        ↓
+object shape
+        ↓
+class prediction
 
-weight, bias는 pythorch를 활용해서 추출해보았다.(stl-10)
-
-mnist > 우리 cnn 데이터셋
+즉 CNN은 이미지의 공간적 구조를 유지하면서 특징을 추출할 수 있기 때문에, 손글씨 숫자 인식, 이미지 분류, 객체 인식 등에 많이 사용된다.
 
 
+## 2. CNN의 기본 구조
 
+CNN은 일반적으로 다음과 같은 구조를 가진다.
+
+Input Image
+    ↓
+Convolution Layer
+    ↓
+Activation Function, ReLU
+    ↓
+Pooling Layer
+    ↓
+Flatten
+    ↓
+Fully Connected Layer
+    ↓
+Output Class
+
+간단히 쓰면 다음과 같다.
+
+Convolution → ReLU → Pooling → Flatten → Fully Connected
+
+Convolution Layer는 이미지에서 특징을 추출하고, ReLU는 비선형성을 추가한다. Pooling Layer는 feature map의 크기를 줄이고 중요한 특징을 유지한다. 이후 Flatten을 통해 feature map을 1차원 벡터로 펼친 뒤, Fully Connected Layer에서 최종 class를 판단한다.
+
+
+## 3. Convolution Layer
+
+Convolution Layer는 입력 데이터와 kernel, 또는 filter를 이용해 합성곱 연산을 수행하는 단계이다.
+
+입력 이미지 위에서 kernel을 일정 간격으로 이동시키면서 곱셈과 덧셈을 수행한다.
+
+입력 이미지 일부 영역 × kernel
+        ↓
+합성곱 연산
+        ↓
+feature map 값
+
+이 결과로 만들어지는 출력을 feature map이라고 한다.
+
+Feature map은 입력 이미지에서 특정 특징이 얼마나 강하게 나타나는지를 의미한다.
+
+예를 들어 어떤 kernel이 세로선 특징을 잘 찾는 kernel이라면, 입력 이미지에 세로선이 있는 부분에서 feature map 값이 크게 나온다.
+
+즉 다음과 같이 이해할 수 있다.
+
+이미지 특징과 kernel이 유사함 → feature map 값 큼
+이미지 특징과 kernel이 유사하지 않음 → feature map 값 작음
+
+
+## 4. Kernel의 의미
+
+Kernel은 CNN에서 특징을 추출하기 위한 작은 행렬이다.
+
+예를 들어 3x3 kernel이면 입력 이미지의 3x3 영역을 보면서 특징을 계산한다.
+
+하나의 kernel은 하나의 특징을 찾는 역할을 한다. Kernel이 여러 개 있으면 여러 종류의 feature map이 만들어진다.
+
+예를 들면 다음과 같다.
+
+kernel 1 → edge feature map
+kernel 2 → curve feature map
+kernel 3 → texture feature map
+
+Kernel이 많아질수록 더 다양한 특징을 추출할 수 있고, 복잡한 이미지 패턴을 표현할 수 있다. 하지만 kernel이 많아지면 연산량과 파라미터 수도 증가한다.
+
+
+## 5. Feature Map 크기
+
+Feature map의 크기는 input size, kernel size, stride, padding에 의해 결정된다.
+
+일반식은 다음과 같다.
+
+Output Size = ((Input Size - Kernel Size + 2 × Padding) / Stride) + 1
+
+예를 들어 입력 이미지가 28x28이고, kernel size가 3x3, stride가 1, padding이 0이면 출력 크기는 다음과 같다.
+
+28 - 3 + 1 = 26
+
+즉 feature map 크기는 26x26이 된다.
+
+Padding이 없는 경우 kernel 크기가 커질수록 feature map 크기는 작아진다. 하지만 padding을 사용하면 feature map 크기를 유지할 수 있다.
+
+
+## 6. Stride
+
+Stride는 kernel을 몇 칸씩 이동시킬지를 의미한다.
+
+Stride가 1이면 kernel을 한 칸씩 이동하면서 convolution 연산을 수행한다. Stride가 커지면 kernel이 더 크게 이동하므로 feature map 크기가 작아진다.
+
+stride = 1 → 자세하게 특징 추출, feature map 큼
+stride = 2 → 덜 촘촘하게 특징 추출, feature map 작음
+
+즉 stride는 연산량과 디테일 정도를 조절하는 요소이다.
+
+Stride가 작으면 더 세밀하게 특징을 추출할 수 있지만 연산량이 증가한다. Stride가 크면 연산량은 줄어들지만 세부 정보가 줄어들 수 있다.
+
+
+## 7. Padding
+
+Padding은 입력 데이터 주변을 0으로 채우는 것이다.
+
+Padding을 사용하는 이유는 크게 두 가지이다.
+
+첫째, feature map의 크기를 유지할 수 있다.
+둘째, 이미지의 가장자리 정보도 convolution 연산에 포함시킬 수 있다.
+
+Padding이 없으면 convolution 과정에서 가장자리 픽셀은 중앙 픽셀보다 연산에 적게 참여한다. Padding을 넣으면 가장자리 정보도 더 충분히 반영할 수 있다.
+
+padding 없음 → feature map 크기 감소
+padding 있음 → feature map 크기 유지 가능
+
+
+## 8. ReLU
+
+ReLU는 CNN에서 많이 사용하는 activation function이다.
+
+ReLU의 동작은 간단하다.
+
+x > 0  → x 그대로 출력
+x <= 0 → 0 출력
+
+식으로 쓰면 다음과 같다.
+
+ReLU(x) = max(0, x)
+
+ReLU를 사용하는 이유는 신경망에 비선형성을 추가하기 위해서이다.
+
+만약 activation function이 없으면 여러 layer를 쌓아도 결국 하나의 선형 연산처럼 동작할 수 있다. ReLU를 사용하면 음수 값은 0으로 제거되고, 양수 값은 그대로 유지된다.
+
+ReLU 이후 activation 값은 음수가 아니기 때문에, shift 기반 연산이나 양자화 처리에 유리한 부분이 있다.
+
+하지만 중요한 점은 activation 값은 ReLU 이후 음수가 제거될 수 있지만, weight 값은 음수가 존재할 수 있다는 것이다. 따라서 weight를 log2 양자화할 때는 sign bit가 필요하다.
+
+
+## 9. Log2 Quantization과 Shift Operation
+
+FPGA에서 CNN을 구현할 때 일반 곱셈을 많이 사용하면 DSP 자원을 많이 사용하게 되고, 전력 소모도 증가할 수 있다.
+
+이를 줄이기 위해 Log2 Quantization을 사용한다.
+
+Log2 Quantization은 weight 값을 그대로 사용하는 것이 아니라, shift 연산으로 표현 가능한 2의 거듭제곱 형태로 근사하는 방식이다.
+
+예를 들어 원래 weight가 0.31이라면 다음과 같이 근사할 수 있다.
+
+0.31 ≈ 0.25 = 2^-2
+
+그러면 곱셈을 shift 연산으로 바꿀 수 있다.
+
+input × 0.25
+      ↓
+input >> 2
+
+즉 전체 흐름은 다음과 같다.
+
+Original weight
+      ↓
+Log2-based quantization
+      ↓
+Signed power-of-two value
+      ↓
+Shift operation in RTL
+
+이 과정에서 작은 값이나 영향이 적은 weight 값이 단순화될 수 있다. 따라서 불필요한 noise가 줄어드는 효과가 생길 수 있고, 경우에 따라 정확도가 유지되거나 오히려 향상될 수도 있다.
+
+네 프로젝트에서는 baseline 정확도가 약 91%였고, Log2 shift 기반 양자화 이후 정확도가 95.9%까지 향상되었다.
+
+
+## 10. Pooling Layer
+
+Pooling은 feature map의 크기를 줄이는 과정이다.
+
+대표적으로 Max Pooling을 많이 사용한다.
+
+Max Pooling은 일정 영역 안에서 가장 큰 값을 선택한다.
+
+예를 들어 2x2 영역에서 max pooling을 하면 다음과 같다.
+
+[1  3
+ 2  4]  →  4
+
+즉 가장 큰 activation 값만 남긴다.
+
+Max Pooling에서 값이 크다는 것은 해당 영역에서 특정 특징이 강하게 반응했다는 뜻이다.
+
+Pooling을 사용하면 feature map 크기가 줄어들기 때문에 연산량이 감소한다. 또한 위치가 조금 변해도 중요한 특징을 유지할 수 있어, 위치 변화에 조금 더 강한 모델을 만들 수 있다.
+
+다만 pooling 값이 크다고 해서 무조건 좋은 필터라는 뜻은 아니다. 더 정확히는 해당 위치에서 특정 feature가 강하게 나타났다고 보는 것이 맞다.
+
+
+## 11. Flatten
+
+Convolution과 Pooling을 거치면 feature map은 보통 2차원 또는 3차원 형태이다.
+
+예를 들어 feature map이 다음과 같은 형태일 수 있다.
+
+7 × 7 × 16
+
+Fully Connected Layer에 넣기 위해서는 이 feature map을 1차원 벡터로 펼쳐야 한다.
+
+이 과정을 Flatten이라고 한다.
+
+7 × 7 × 16
+    ↓
+784-dimensional vector
+
+Flatten은 새로운 특징을 추출하는 연산이라기보다는, 데이터 형태를 바꾸는 과정에 가깝다.
+
+
+## 12. Fully Connected Layer
+
+Fully Connected Layer는 Flatten된 feature vector를 입력으로 받아 최종 class score를 계산한다.
+
+기본 연산은 다음과 같다.
+
+y = Wx + b
+
+여기서 각 의미는 다음과 같다.
+
+x = flatten된 feature vector
+W = weight
+b = bias
+y = class score
+
+Bias를 더하는 이유는 단순히 ReLU를 잘 되게 하려는 것보다, 출력 값을 이동시켜 모델이 더 유연하게 학습할 수 있도록 하기 위해서이다.
+
+즉 bias가 있으면 decision boundary를 더 자유롭게 조정할 수 있다.
+
+Fully Connected Layer 이후에 ReLU가 들어갈 수도 있고, 마지막 출력 layer에서는 class score를 만든 뒤 가장 큰 값을 가진 class를 최종 결과로 선택할 수 있다.
+
+CNN 일반 구조에서는 Fully Connected Layer가 여러 개 있을 수도 있다. 다만 네 프로젝트에서는 마지막 단계에서 FC layer를 사용해서 최종 분류 결과를 계산한 것으로 정리하면 된다.
+
+
+## 13. Weight와 Bias
+
+Weight와 bias는 CNN이 학습을 통해 얻는 파라미터이다.
+
+Convolution Layer의 weight는 kernel 값이다. Fully Connected Layer의 weight는 flatten된 feature와 class score를 연결하는 가중치이다.
+
+Bias는 각 layer의 출력에 더해지는 값으로, 출력 값을 이동시키는 역할을 한다.
+
+네 프로젝트에서는 PyTorch로 CNN을 학습한 뒤, 학습된 weight와 bias를 추출했다. 이후 RTL에서 읽을 수 있도록 .txt 파일 형태로 변환하고 저장했다.
+
+전체 흐름은 다음과 같다.
+
+PyTorch training
+      ↓
+weight / bias extraction
+      ↓
+log2 quantization
+      ↓
+.txt file conversion
+      ↓
+RTL read and operation
+
+
+## 14. MNIST Dataset
+
+MNIST는 손글씨 숫자 이미지 데이터셋이다.
+
+숫자 0부터 9까지의 손글씨 이미지로 구성되어 있다.
+
+MNIST 이미지는 보통 28x28 크기의 grayscale 이미지이다. 따라서 RGB 3채널 이미지가 아니라 1채널 이미지이다.
+
+네 프로젝트에서는 MNIST를 사용해서 CNN을 학습하고, FPGA RTL에서 CNN 연산을 구현했다.
+
+
+## 15. CNN을 FPGA에 구현할 때 중요한 점
+
+CNN은 convolution 연산이 많기 때문에 곱셈과 덧셈이 많이 필요하다.
+
+특히 weight와 input feature를 곱하는 연산이 반복적으로 수행된다.
+
+FPGA에서 일반 곱셈을 많이 사용하면 DSP 자원이 많이 필요하고, 전력 소모도 증가할 수 있다.
+
+그래서 네 프로젝트에서는 weight를 log2 기반으로 양자화하고, 곱셈을 shift 연산으로 바꿨다.
+
+일반 곱셈 사용
+    ↓
+DSP 사용량 증가, 전력 증가 가능
+
+Log2 shift 사용
+    ↓
+shift 연산으로 대체
+    ↓
+DSP 사용량 감소, 전력 감소 가능
+
+이 방식은 하드웨어 구조를 단순화할 수 있고, FPGA에서 저전력 CNN 구현에 유리하다.
+
+
+## 16. 네 CNN 프로젝트 핵심 요약
+
+네 CNN 프로젝트의 핵심은 다음과 같다.
+
+1. PyTorch로 MNIST CNN 모델 학습
+2. 학습된 weight와 bias 추출
+3. weight를 log2 기반으로 양자화
+4. 곱셈/나눗셈 연산을 shift 연산으로 대체
+5. RTL에서 CNN 연산 구현
+6. Vivado simulation으로 동작 확인
+7. PYNQ-Z2 보드에서 hardware 동작 확인
+8. 정확도, 추론 속도, 전력 소모 비교
+
+결과는 다음과 같다.
+
+Accuracy : 약 91% → 95.9%
+Inference Time : 683.9495 us → 13.32 us
+Total Power : 0.142 W → 0.128 W
+Dynamic Power : 0.039 W → 0.025 W
+
+즉 네 프로젝트는 단순히 CNN을 FPGA에 올린 것이 아니라, PyTorch에서 학습한 CNN 모델을 FPGA RTL로 구현하고, Log2 shift 기반 양자화를 적용하여 정확도 향상, 추론 시간 감소, 전력 감소를 확인한 프로젝트라고 정리할 수 있다.
