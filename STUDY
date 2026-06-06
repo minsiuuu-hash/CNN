@@ -31,6 +31,5 @@ weight, bias는 pythorch를 활용해서 추출해보았다.(stl-10)
 
 mnist > 우리 cnn 데이터셋
 
-pattern이 weight(cnn 필터값)
 
 
