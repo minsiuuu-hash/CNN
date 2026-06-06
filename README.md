@@ -1,67 +1,76 @@
-FPGA : PYNQ-Z2<br>
-Frequency = 125Mhz
+# CNN FPGA Implementation
 
-Tool : PyThorch, Vivado
+FPGA : PYNQ-Z2  
+Frequency : 125 MHz  
 
-Baseline : https://github.com/boaaaang/CNN-Implementation-in-Verilog
+Tool : PyTorch, Vivado  
+Baseline : [CNN-Implementation-in-Verilog](https://github.com/boaaaang/CNN-Implementation-in-Verilog)
 
-Design Goal
-1. Weight extraction and quantization using PyTorch<br>
-   1) Leverages CNN models trained with PyTorch<br>
-   2) Weight and bias extraction and purification<br>
-   3) Applying log2-based quantization<br>
-   4) .txt file conversion and save and read<br>
-   
-2. Using vivado to design RTL code<br>
+---
 
-   1) Table .v FILE<br>
-   ![project image](img/RTL.png) <br>
+## Design Goal
 
-   
-   2) To utilize low power, the Log2 shift method is used instead of dividing.<br>
+### 1. Weight Extraction and Quantization Using PyTorch
 
+1. Leverages CNN models trained with PyTorch
+2. Weight and bias extraction and purification
+3. Applying log2-based quantization
+4. `.txt` file conversion, save, and read
 
+### 2. RTL Design Using Vivado
 
-CNN Structure<br>
-The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.<br>
-We use MNIST Dataset<br>
+1. Table `.v` file
 
-● Batch Size = 64<br>
-● Training Epoch = 10<br>
-● Learning Rate = 0.01<br>
-● Optimizer = Stochastical Gradient Descent (Momentum = 0.5)<br>
-● Activation Function = ReLU<br>
-![project image](img/CNN.png)<br>
+![project image](img/RTL.png)
 
-we could check the accuracy of about 96%.<br>
-![project image](img/pythorch_result.png)<br>
+2. To utilize low power, the Log2 shift method is used instead of dividing.
 
-RTL Code BlockDiagram<br>
-![project image](img/blockdiagram.png) <br>
+---
 
-Simulation Result(INPUT 1000)
-![project image](img/simulation_result_console.png) <br>
+## CNN Structure
 
-Compare Resource
-![project image](img/using_source.png)<br>
+The structure of the adopted CNN is 2-layer below, and the parameters are set as follows.
 
-[캡스톤디자인_CNN.pdf](https://github.com/user-attachments/files/28446940/_CNN.pdf)
+We use MNIST Dataset.
 
+| Parameter | Value |
+|---|---|
+| Batch Size | 64 |
+| Training Epoch | 10 |
+| Learning Rate | 0.01 |
+| Optimizer | Stochastical Gradient Descent, Momentum = 0.5 |
+| Activation Function | ReLU |
 
+![project image](img/CNN.png)
 
+We could check the accuracy of about 96%.
 
+![project image](img/pythorch_result.png)
 
+---
 
+## RTL Code Block Diagram
 
+![project image](img/blockdiagram.png)
 
+---
 
+## Simulation Result
 
+Input : `1000`
 
+![project image](img/simulation_result_console.png)
 
+---
 
+## Resource Comparison
 
+![project image](img/using_source.png)
 
+---
 
-in the bottom, it is our presentation.   
+## Presentation
 
+In the bottom, it is our presentation.
 
+- [캡스톤디자인_CNN.pdf](https://github.com/user-attachments/files/28446940/_CNN.pdf)
