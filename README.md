@@ -76,15 +76,25 @@ MNIST Dataset is used for training and testing.
 
 ![project image](img/CNN.png)
 
-The trained model achieved about 96% accuracy.
+---
 
-![project image](img/pytorch_result.png)
+## Baseline Simulation Result
+
+Before applying the Log2 shift method, the baseline CNN RTL was modified and verified to operate correctly in simulation.
+
+The baseline simulation result showed about **91% accuracy**.
+
+| Item | Result |
+|---|---:|
+| Model | Baseline CNN |
+| Optimization | Before Log2 shift |
+| Accuracy | About 91% |
 
 ---
 
-## Accuracy Result
+## Log2 Shift Accuracy Result
 
-The CNN model was tested using 1000 MNIST test images.
+After applying Log2-based quantization and shift operation, the CNN model was tested using 1000 MNIST test images.
 
 | Item | Result |
 |---|---:|
@@ -93,25 +103,24 @@ The CNN model was tested using 1000 MNIST test images.
 | Wrong Images | 41 |
 | Final Accuracy | 95.9% |
 
-The baseline model showed about 91% accuracy, and the Log2 shift-based quantized model improved the accuracy to **95.9%**.
+The Log2 shift-based quantized model improved the accuracy from about **91%** to **95.9%**.
 
-This result shows that the Log2 quantization reduced hardware complexity and improved the classification accuracy in this experiment.
+---
+
+## Accuracy Comparison
+
+| Model | Accuracy |
+|---|---:|
+| Baseline CNN Simulation | About 91% |
+| Log2 Shift-based CNN | 95.9% |
+
+The result shows that the Log2 shift-based quantization reduced arithmetic complexity while improving classification accuracy in this experiment.
 
 ---
 
 ## RTL Code Block Diagram
 
 ![project image](img/blockdiagram.png)
-
----
-
-## Simulation Result
-
-Input : `1000`
-
-![project image](img/simulation_result_console.png)
-
-The simulation result was checked to verify that the RTL design produces the expected output value.
 
 ---
 
@@ -174,7 +183,7 @@ Especially, dynamic power was reduced by about **35.9%**, which shows that the L
 
 | Metric | Result |
 |---|---:|
-| Accuracy Improvement | 91% → 95.9% |
+| Accuracy Improvement | About 91% → 95.9% |
 | Average Inference Time Reduction | About 51.35× |
 | Total On-Chip Power Reduction | 9.9% |
 | Dynamic Power Reduction | 35.9% |
