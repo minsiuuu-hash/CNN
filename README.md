@@ -198,3 +198,5 @@ Therefore, the proposed method is effective for FPGA-based low-power CNN impleme
 In the bottom, it is our presentation.
 
 - [캡스톤디자인_CNN.pdf](https://github.com/user-attachments/files/28446940/_CNN.pdf)
+- [캡스톤디자인 CNN_FPGA구현.pdf](https://github.com/user-attachments/files/28663692/CNN_FPGA.pdf)
+
