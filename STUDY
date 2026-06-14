@@ -219,10 +219,10 @@ CNN 구조에 따라 Fully Connected Layer가 여러 개 들어갈 수도 있다
 
 12. Weight와 Bias
 
-Weight와 bias는 CNN이 학습을 통해 얻는 파라미터이다.
+Weight와 Bias는 CNN이 학습을 통해 얻는 파라미터이다.
 
-Weight = 어떤 패턴을 볼지 정하는 값
-Bias = 그 패턴에 얼마나 민감하게 반응할지 기준을 조절하는 값
+Weight = 입력 데이터에서 어떤 특징을 중요하게 볼지 결정하는 값
+Bias = Weight 계산 결과의 기준점을 조절하여 출력값을 보정하는 값
 
 Convolution Layer에서 weight는 kernel 값이라고 볼 수 있다.
 Fully Connected Layer에서 weight는 flatten된 feature와 output class를 연결하는 가중치이다.
