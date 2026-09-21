@@ -47,23 +47,17 @@ Kernel 크기도 중요하다. Kernel이 크면 한 번에 더 넓은 영역을 
 
 5. Feature Map 크기
 Feature map의 크기는 input size, kernel size, stride, padding에 의해 결정된다.
-
-Output Size = ((Input Size - Kernel Size + 2 × Padding) / Stride) + 1
-
-예를 들어 입력 이미지가 28x28이고, kernel size가 3x3, stride가 1, padding이 0이면 출력 크기는 다음과 같다.
-
+Feature map Size = ((Input Size - Kernel Size + 2 × Padding) / Stride) + 1
+ex) 
+이미지가 28x28이고, kernel size가 3x3, stride가 1, padding이 0이면 출력 크기는 다음과 같다.
 28 - 3 + 1 = 26
-
 따라서 feature map 크기는 26x26이 된다.
 
 Padding이 없는 경우 kernel 크기가 커질수록 feature map 크기는 작아진다. 하지만 padding을 사용하면 feature map 크기를 유지할 수 있다.
-
 결국 kernel size, stride, padding은 연산량과 feature map 크기, 그리고 특징을 얼마나 자세히 볼지에 영향을 준다.
 
 6. Stride
-
 Stride는 kernel을 몇 칸씩 이동시킬지를 의미한다.
-
 Stride가 1이면 kernel을 한 칸씩 이동하면서 convolution 연산을 반복한다. Stride가 커지면 kernel이 더 크게 이동하므로 feature map 크기가 작아진다.
 
 stride = 1
@@ -79,16 +73,13 @@ stride = 2 이상
 즉 stride는 연산량과 디테일 정도를 조절하는 요소라고 볼 수 있다.
 
 7. Padding
-
 Padding은 입력 데이터 주변을 0으로 채우는 것이다.
 
-Padding을 사용하는 이유는 크게 두 가지이다.
-
-첫째, feature map 크기를 유지할 수 있다.
-둘째, 이미지의 가장자리 정보도 convolution 연산에 포함시킬 수 있다.
+Padding을 사용하는 이유
+1) feature map 크기를 유지할 수 있다.
+2) 이미지의 가장자리 정보도 convolution 연산에 포함시킬 수 있다.
 
 Padding이 없으면 가장자리 픽셀은 중앙 픽셀보다 convolution 연산에 적게 참여한다. 그래서 가장자리 정보가 상대적으로 덜 반영될 수 있다.
-
 Padding을 넣으면 입력 이미지 주변에 0이 추가되기 때문에, 가장자리 픽셀도 연산에 더 잘 포함된다.
 
 padding 없음
@@ -100,52 +91,37 @@ padding 있음
 → 가장자리 정보도 연산에 포함 가능
 
 8. ReLU
-
 ReLU는 CNN에서 많이 사용하는 활성화 함수이다.
 
-동작은 간단하다.
-
+ReLU(x) = max(0, x)
 x > 0 이면 x 그대로 출력
 x <= 0 이면 0 출력
-
-식으로 쓰면 다음과 같다.
-
-ReLU(x) = max(0, x)
 
 ReLU를 사용하는 이유는 신경망에 비선형성을 추가하기 위해서이다.
 
 만약 ReLU 같은 activation function이 없으면, 여러 layer를 쌓아도 결국 선형 연산을 여러 번 하는 것과 비슷해질 수 있다. 그러면 복잡한 패턴을 학습하기 어렵다.
-
 ReLU를 사용하면 음수 값은 제거되고 양수 값만 남는다. 연산도 단순하고 학습도 비교적 잘 되기 때문에 CNN에서 많이 사용된다.
-
 그리고 ReLU 이후의 activation 값은 음수가 없기 때문에, 이후 연산을 양자화하거나 shift 기반으로 처리할 때 유리한 부분이 있다.
-
 다만 activation 값은 ReLU 이후 음수가 없어질 수 있지만, weight 값은 음수가 존재할 수 있다. 그래서 weight를 log2 기반으로 양자화할 때는 sign bit가 필요하다.
 
 9. Pooling Layer
-
 Pooling은 feature map의 크기를 줄이는 과정이다.
 
 대표적으로 Max Pooling을 많이 사용한다.
-
 Max Pooling은 일정 영역 안에서 가장 큰 값을 선택한다.
 
-예를 들어 2x2 영역이 다음과 같으면,
-
+ex) 
+2x2 영역이 다음과 같으면,
 1  3
 2  4
-
 Max Pooling 결과는 4가 된다.
 
 즉 해당 영역에서 가장 강하게 반응한 activation 값만 남기는 것이다.
-
 Pooling을 사용하는 이유는 feature map 크기를 줄여서 연산량을 감소시키기 위해서이다. 또한 위치가 조금 바뀌어도 중요한 특징은 유지할 수 있기 때문에, 위치 변화에 어느 정도 강한 모델을 만들 수 있다.
-
 Pooling 값이 크다는 것은 해당 영역에서 특정 feature가 강하게 나타났다는 뜻이다.
 다만 pooling 값이 크다고 해서 무조건 좋은 필터라는 뜻은 아니다. 정확히는 특정 위치에서 그 feature가 강하게 반응했다고 보는 게 맞다.
 
 10. Flatten
-
 Convolution과 Pooling을 거치면 feature map은 보통 2차원 또는 3차원 형태이다.
 
 예를 들어 feature map이 다음과 같은 형태일 수 있다.
