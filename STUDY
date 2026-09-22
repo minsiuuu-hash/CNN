@@ -281,8 +281,12 @@ Log2 shift 사용
 결과
 Accuracy : 약 91% → 95.9%
 Inference Time : 683.9495 us → 13.32 us
-Total Power : 0.142 W → 0.128 W
+
+Vivado 합성 단계 Report Power 추정 결과
+Total On-Chip Power : 0.142 W → 0.128 W
 Dynamic Power : 0.039 W → 0.025 W
 
 결론적으로 CNN을 FPGA에 구현하면서 PyTorch에서 학습한 weight와 bias를 RTL에서 사용할 수 있도록 변환했고, Log2 shift 기반 양자화를 적용해서 곱셈 연산을 shift 연산으로 대체했다.
-그 결과 정확도는 약 91%에서 95.9%로 향상되었고, 추론 시간과 전력 소모도 줄어드는 결과를 확인했다.
+그 결과 정확도는 약 91%에서 95.9%로 향상되었고, 추론 시간도 단축되었다.
+또한 동일한 합성 단계의 Vivado Report Power 추정 결과에서 Total On-Chip Power와 Dynamic Power가 감소하였다.
+배치·배선 후의 전력 추정치는 구현 및 전력 분석 조건에 따라 달라질 수 있다.
