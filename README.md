@@ -1,7 +1,8 @@
 # CNN FPGA Implementation
 
-FPGA : PYNQ-Z2  
-Frequency : 125 MHz  
+FPGA : PYNQ-Z2
+Board Input Clock : 125 MHz
+CNN Internal Clock : 100 MHz
 
 Tool : PyTorch, Vivado  
 Baseline : [CNN-Implementation-in-Verilog](https://github.com/boaaaang/CNN-Implementation-in-Verilog)
