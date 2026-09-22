@@ -176,6 +176,10 @@ As a result, the CNN operation can be implemented with lower hardware resource u
 
 The power consumption was compared before and after applying the Log2 shift-based CNN model.
 
+These values are Vivado power estimates obtained from synthesized netlists
+under the same analysis conditions. Post-route power estimates may differ
+depending on implementation and switching-activity assumptions.
+
 | Item | Before Log2 Shift | After Log2 Shift | Reduction |
 |---|---:|---:|---:|
 | Total On-Chip Power | 0.142 W | 0.128 W | 9.9% |
