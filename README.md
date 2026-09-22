@@ -23,7 +23,7 @@ Baseline : [CNN-Implementation-in-Verilog](https://github.com/boaaaang/CNN-Imple
 
 ![project image](img/RTL.png)
 
-2. To reduce hardware resource usage and power consumption, the Log2 shift method is used instead of division operation.
+2. To reduce hardware resource usage and power consumption, The Log2 shift method is used to replace weight multiplication with shift operations.
 
 The Log2 shift method replaces complex arithmetic operations with shift-based operations.  
 By using shift operations instead of division or multiplication, the hardware structure can be simplified and DSP usage can be reduced.
@@ -55,7 +55,14 @@ acc = acc + (weight == 4'b1111 ? 0 :
                          (input << weight[2:0]));
 ```
 
-This quantization process simplifies small or less meaningful weight values and reduces unnecessary arithmetic complexity.  
+Log2 quantization introduces quantization error because the original weights
+are approximated by signed powers of two. Therefore, accuracy may decrease,
+remain unchanged, or increase depending on the model and evaluation conditions.
+
+In this experiment, the measured accuracy increased from about 91% to 95.9%.
+However, the exact cause of this improvement has not been verified, so it
+cannot be attributed solely to Log2 quantization.
+
 As a result, the CNN model can be implemented with lower hardware cost while maintaining or improving classification accuracy.
 
 ---
@@ -188,8 +195,10 @@ Especially, dynamic power was reduced by about **35.9%**, which shows that the L
 | Total On-Chip Power Reduction | 9.9% |
 | Dynamic Power Reduction | 35.9% |
 
-The Log2 shift-based CNN improved accuracy, reduced inference time, and lowered power consumption.  
-Therefore, the proposed method is effective for FPGA-based low-power CNN implementation.
+In this experiment, the Log2 shift-based CNN achieved 95.9% accuracy,
+reduced the estimated inference latency, and showed lower post-synthesis
+power estimates. These results demonstrate the hardware efficiency of
+shift-based weight computation in the evaluated design.
 
 ---
 
